@@ -609,7 +609,7 @@ static DWORD WINAPI search4QuadBasesThread(LPVOID data)
     return 0;
 }
 
-
+/*
 void search4QuadBases(const char *fnam, const int threads,
         const StructureConfig structureConfig, const int quality)
 {
@@ -694,7 +694,7 @@ void search4QuadBases(const char *fnam, const int threads,
     }
 
     fclose(fp);
-}
+}*/
 
 
 //==============================================================================

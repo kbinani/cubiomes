@@ -1718,7 +1718,7 @@ void mapVoronoiZoom(Layer *l, int * __restrict out, int areaX, int areaZ, int ar
     int newWidth = (pWidth-1) << 2;
     int newHeight = (pHeight-1) << 2;
     int x, z, i, j;
-    int *buf = (int *)malloc((newWidth+1)*(newHeight+1)*sizeof(*buf));
+    int *buf = (int *)calloc((newWidth+1)*(newHeight+1), sizeof(*buf));
 
     l->p->getMap(l->p, out, pX, pZ, pWidth, pHeight);
 
@@ -1783,9 +1783,18 @@ void mapVoronoiZoom(Layer *l, int * __restrict out, int areaX, int areaZ, int ar
         }
     }
 
+    int const size = areaWidth * areaHeight;
+
     for (z = 0; z < areaHeight; z++)
     {
-        memcpy(&out[z * areaWidth], &buf[(z + (areaZ & 3))*newWidth + (areaX & 3)], areaWidth*sizeof(int));
+//        memcpy(&out[z * areaWidth], &buf[(z + (areaZ & 3))*newWidth + (areaX & 3)], areaWidth*sizeof(int));
+        for (int i = 0; i < areaWidth; i++) {
+            int from = (z + (areaZ & 3))*newWidth + (areaX & 3) + i;
+            int to = z * areaWidth + i;
+            if (0 <= from && from < (newWidth+1)*(newHeight+1) && 0 <= to && to < size) {
+                out[to] = buf[from];
+            }
+        }
     }
 
     free(buf);

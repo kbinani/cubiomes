@@ -80,8 +80,7 @@ LayerStack setupGenerator(const int mcversion)
     setupLayer(128,  &l[L_ZOOM_128_HILLS],      &l[L_RIVER_INIT_256],       1000, mapZoom);
     setupLayer(64,   &l[L_ZOOM_64_HILLS],       &l[L_ZOOM_128_HILLS],       1001, mapZoom);
 
-    setupMultiLayer(64, &l[L_HILLS_64], &l[L_BIOME_EDGE_64], &l[L_ZOOM_64_HILLS], 1000,
-            (mcversion & 0xff) <= MC_1_12 ? mapHills : mapHills113);
+    setupMultiLayer(64, &l[L_HILLS_64], &l[L_BIOME_EDGE_64], &l[L_ZOOM_64_HILLS], 1000, (mcversion & 0xff) <= MC_1_12 ? mapHills : mapHills113);
 
     setupLayer(64,   &l[L_RARE_BIOME_64],       &l[L_HILLS_64],             1001, mapRareBiome);
     setupLayer(32,   &l[L_ZOOM_32],             &l[L_RARE_BIOME_64],        1000, mapZoom);
