@@ -295,7 +295,7 @@ static inline int mcNextInt(Layer *layer, int mod)
 
 
 
-static inline int64_t processWorldSeed(register int64_t ws, const int64_t bs)
+static inline int64_t processWorldSeed(int64_t ws, const int64_t bs)
 {
     ws *= ws * 6364136223846793005LL + 1442695040888963407LL;
     ws += bs;
@@ -307,7 +307,7 @@ static inline int64_t processWorldSeed(register int64_t ws, const int64_t bs)
     return ws;
 }
 
-static inline int64_t getChunkSeed(register int64_t ss, const int64_t x, const int64_t z)
+static inline int64_t getChunkSeed(int64_t ss, const int64_t x, const int64_t z)
 {
     ss += x;
     ss *= ss * 6364136223846793005LL + 1442695040888963407LL;
