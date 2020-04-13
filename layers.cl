@@ -589,13 +589,7 @@ void mapZoom_NR(long worldSeed,
     int newWidth = (pWidth) << 1;
     int newHeight = (pHeight) << 1;
     int idx, a, b;
-    //int* buf = (int*)mm.alloc((newWidth + 1) * (newHeight + 1) * sizeof(*buf));
-    //int* buf = alloc(mm, (newWidth + 1) * (newHeight + 1));
-    int buf[@{MemoryUsage::mapZoom}];
-    for (int i = 0; i < @{MemoryUsage::mapZoom}; i++) {
-        buf[i] = 0;
-    }
-    //assert((newWidth + 1) * (newHeight + 1) <= areaWidth * areaHeight);
+    int buf[CB_MAXLEN_MAP_ZOOM] = {0};
 
     const int ws = (int)worldSeed;
     const int ss = ws * (ws * 1284865837 + 4150755663);
@@ -1750,15 +1744,10 @@ void genArea_L_HILLS_64(int mcversion, long const seed, int * out, int const are
     int pWidth = areaWidth + 2;
     int pHeight = areaHeight + 2;
     genArea_L_BIOME_EDGE_64(mcversion, seed, out, pX, pZ, pWidth, pHeight);
-    //int *buf = (int *) mm.alloc(pWidth*pHeight*sizeof(int));
-    //mm.memcpy(buf, out, pWidth*pHeight*sizeof(int));
     int size = pWidth * pHeight;
-    int buf[@{MemoryUsage::genArea_L_HILLS_64}];
+    int buf[CB_MAXLEN_L_HILLS_64] = {0};
     for (int i = 0; i < size; i++) {
         buf[i] = out[i];
-    }
-    for (int i = size; i < @{MemoryUsage::genArea_L_HILLS_64}; i++) {
-        buf[i] = 0;
     }
     genArea_L_ZOOM_64_HILLS(mcversion, seed, out, pX, pZ, pWidth, pHeight);
     long worldSeed = getWorldSeed(seed, 1000);
@@ -1767,7 +1756,6 @@ void genArea_L_HILLS_64(int mcversion, long const seed, int * out, int const are
     } else {
         mapHills113_NR(worldSeed, out, buf, areaX, areaZ, areaWidth, areaHeight);
     }
-    //mm.free(buf);
 }
 
 void mapRareBiome_NR(long worldSeed, int * out, int areaX, int areaZ, int areaWidth, int areaHeight)
@@ -2170,19 +2158,13 @@ void genArea_L_RIVER_MIX_4(int mcversion, long const seed, int * out, int const 
 {
     genArea_L_SMOOTH_4(mcversion, seed, out, areaX, areaZ, areaWidth, areaHeight);
     int len = areaWidth*areaHeight;
-    //int *buf = (int *) mm.alloc(len*sizeof(int));
-    //mm.memcpy(buf, out, len*sizeof(int));
-    int buf[@{MemoryUsage::genArea_L_RIVER_MIX_4}];
+    int buf[CB_MAXLEN_L_RIVER_MIX_4] = {0};
     for (int i = 0; i < len; i++) {
         buf[i] = out[i];
-    }
-    for (int i = len; i < @{MemoryUsage::genArea_L_RIVER_MIX_4}; i++) {
-        buf[i] = 0;
     }
     genArea_L_SMOOTH_4_RIVER(mcversion, seed, out, areaX, areaZ, areaWidth, areaHeight);
     long const worldSeed = getWorldSeed(seed, 100);
     mapRiverMix_NR(worldSeed, out, buf, areaX, areaZ, areaWidth, areaHeight);
-    //mm.free(buf);
 }
 
 struct OceanRnd
@@ -2479,33 +2461,20 @@ void genArea_L13_OCEAN_MIX_4(int mcversion, long const seed, int * out, int cons
 {
     int landX = areaX-8, landZ = areaZ-8;
     int landWidth = areaWidth+17, landHeight = areaHeight+17;
-    //int *map1, *map2;
     genArea_L_RIVER_MIX_4(mcversion, seed, out, landX, landZ, landWidth, landHeight);
-    //map1 = (int *)mm.alloc(landWidth*landHeight*sizeof(int));
-    //mm.memcpy(map1, out, landWidth*landHeight*sizeof(int));
-    int map1[@{MemoryUsage::genArea_L13_OCEAN_MIX_4_map1}];
+    int map1[CB_MAXLEN_L13_OCEAN_MIX_4_MAP1] = {0};
     for (int i = 0; i < landWidth * landHeight; i++) {
         map1[i] = out[i];
     }
-    for (int i = landWidth * landHeight; i < @{MemoryUsage::genArea_L13_OCEAN_MIX_4_map1}; i++) {
-        map1[i] = 0;
-    }
 
     genArea_L13_ZOOM_4(mcversion, seed, out, areaX, areaZ, areaWidth, areaHeight);
-    //map2 = (int *)mm.alloc(areaWidth*areaHeight*sizeof(int));
-    //mm.memcpy(map2, out, areaWidth*areaHeight*sizeof(int));
-    int map2[@{MemoryUsage::genArea_L13_OCEAN_MIX_4_map2}];
+    int map2[CB_MAXLEN_L13_OCEAN_MIX_4_MAP2] = {0};
     for (int i = 0; i < areaWidth * areaHeight; i++) {
         map2[i] = out[i];
-    }
-    for (int i = areaWidth * areaHeight; i < @{MemoryUsage::genArea_L13_OCEAN_MIX_4_map2}; i++) {
-        map2[i] = 0;
     }
 
     long const worldSeed = getWorldSeed(seed, 100);
     mapOceanMix_NR(worldSeed, out, areaX, areaZ, areaWidth, areaHeight, map1, map2);
-    //mm.free(map1);
-    //mm.free(map2);
 }
 
 void mapVoronoiZoom_NR(long worldSeed, int * out, int areaX, int areaZ, int areaWidth, int areaHeight, int *buf)
@@ -2596,18 +2565,14 @@ void genArea_L_VORONOI_ZOOM_1(int mcversion, long const seed, int* out, int cons
     } else {
         genArea_L13_OCEAN_MIX_4(mcversion, seed, out, pX, pZ, pWidth, pHeight);
     }
+
     int const bufLen = (newWidth + 1) * (newHeight + 1);
-    //int *buf = (int *)mm.calloc(bufLen, sizeof(int));
-    int buf[@{MemoryUsage::genArea_L_VORONOI_ZOOM_1}];
-    for (int i = 0; i < @{MemoryUsage::genArea_L_VORONOI_ZOOM_1}; i++) {
-        buf[i] = 0;
-    }
+    int buf[CB_MAXLEN_L_VORONOI_ZOOM_1] = {0};
     long worldSeed = getWorldSeed(seed, 10);
     mapVoronoiZoom_NR(worldSeed, out, a_areaX, a_areaZ, areaWidth, areaHeight, buf);
     int const outLen = areaWidth * areaHeight;
     for (int z = 0; z < areaHeight; z++)
     {
-//        mm.memcpy(&out[z * areaWidth], &buf[(z + (areaZ & 3))*newWidth + (areaX & 3)], areaWidth*sizeof(int));
         for (int i = 0; i < areaWidth; i++) {
             int from = (z + (areaZ & 3)) * newWidth + (areaX & 3) + i;
             int to = z * areaWidth + i;
@@ -2616,7 +2581,6 @@ void genArea_L_VORONOI_ZOOM_1(int mcversion, long const seed, int* out, int cons
             }
         }
     }
-    //mm.free(buf);
 }
 
 void genArea(int const mcversion, long const seed, int const layer, int *out, int const x, int const z, int const width, int const height)
