@@ -1,4 +1,21 @@
-bool isVillageBiome(int biomeId) {
+bool isVillageBiome(int biomeId);
+bool isJunglePyramidBiome(int biomeId);
+bool isShipwreckBiome(int biomeId);
+bool isDesertPyramidBiome(int biomeId);
+bool isBuriedTreasureBiome(int biomeId);
+bool isIglooBiome(int biomeId);
+bool isMansionBiome(int biomeID);
+int getBiomeAtPos(int mcversion, long seed, int bx, int bz);
+bool isViableMansionPos(int mcversion, long seed, int bx, int bz);
+bool isViableVillagePos(int mcversion, long seed, int bx, int bz);
+bool isViableIglooPos(int mcversion, long seed, int bx, int bz);
+bool isViableJunglePyramidPos(int mcversion, long seed, int bx, int bz);
+bool isViableDesertPyramidPos(int mcversion, long seed, int bx, int bz);
+bool isViableBuriedTreasurePos(int mcversion, long seed, int bx, int bz);
+bool isViableShipwreckPos(int mcversion, long seed, int bx, int bz);
+
+bool isVillageBiome(int biomeId)
+{
     return (biomeId == plains ||
             biomeId == desert ||
             biomeId == taiga ||
@@ -6,14 +23,16 @@ bool isVillageBiome(int biomeId) {
             biomeId == savanna);
 }
 
-bool isJunglePyramidBiome(int biomeId) {
+bool isJunglePyramidBiome(int biomeId)
+{
     return (biomeId == jungle ||
             biomeId == jungle_hills ||
             biomeId == bamboo_jungle ||
             biomeId == bamboo_jungle_hills);
 }
 
-bool isShipwreckBiome(int biomeId) {
+bool isShipwreckBiome(int biomeId)
+{
     return (biomeId == ocean ||
             biomeId == frozen_ocean ||
             biomeId == beach ||
@@ -28,33 +47,39 @@ bool isShipwreckBiome(int biomeId) {
             biomeId == deep_frozen_ocean);
 }
 
-bool isDesertPyramidBiome(int biomeId) {
+bool isDesertPyramidBiome(int biomeId)
+{
     return (biomeId == desert ||
             biomeId == desert_hills);
 }
 
-bool isBuriedTreasureBiome(int biomeId) {
+bool isBuriedTreasureBiome(int biomeId)
+{
     return (biomeId == beach ||
             biomeId == snowy_beach);
 }
 
-bool isIglooBiome(int biomeId) {
+bool isIglooBiome(int biomeId)
+{
     return (biomeId == snowy_tundra ||
             biomeId == snowy_taiga);
 }
 
-bool isMansionBiome(int biomeID) {
+bool isMansionBiome(int biomeID)
+{
     return (biomeID == dark_forest ||
             biomeID == dark_forest_hills);
 }
 
-int getBiomeAtPos(int mcversion, long seed, int bx, int bz) {
+int getBiomeAtPos(int mcversion, long seed, int bx, int bz)
+{
     int out[CB_MAXLEN_L_VORONOI_ZOOM_1] = { 0 };
     genArea(mcversion, seed, L_VORONOI_ZOOM_1, out, bx, bz, 1, 1);
     return out[0];
 }
 
-bool isViableMansionPos(int mcversion, long seed, int bx, int bz) {
+bool isViableMansionPos(int mcversion, long seed, int bx, int bz)
+{
     int radius = 32;
     int x1 = (bx - radius) >> 2;
     int z1 = (bz - radius) >> 2;
@@ -73,7 +98,8 @@ bool isViableMansionPos(int mcversion, long seed, int bx, int bz) {
     return true;
 }
 
-bool isViableVillagePos(int mcversion, long seed, int bx, int bz) {
+bool isViableVillagePos(int mcversion, long seed, int bx, int bz)
+{
     int x1 = bx >> 2;
     int z1 = bz >> 2;
     int out[CB_MAXLEN_L_RIVER_MIX_4] = { 0 };
@@ -82,27 +108,32 @@ bool isViableVillagePos(int mcversion, long seed, int bx, int bz) {
     return isVillageBiome(biome);
 }
 
-bool isViableIglooPos(int mcversion, long seed, int bx, int bz) {
+bool isViableIglooPos(int mcversion, long seed, int bx, int bz)
+{
     int biome = getBiomeAtPos(mcversion, seed, bx, bz);
     return isIglooBiome(biome);
 }
 
-bool isViableJunglePyramidPos(int mcversion, long seed, int bx, int bz) {
+bool isViableJunglePyramidPos(int mcversion, long seed, int bx, int bz)
+{
     int biome = getBiomeAtPos(mcversion, seed, bx, bz);
     return isJunglePyramidBiome(biome);
 }
 
-bool isViableDesertPyramidPos(int mcversion, long seed, int bx, int bz) {
+bool isViableDesertPyramidPos(int mcversion, long seed, int bx, int bz)
+{
     int biome = getBiomeAtPos(mcversion, seed, bx, bz);
     return isDesertPyramidBiome(biome);
 }
 
-bool isViableBuriedTreasurePos(int mcversion, long seed, int bx, int bz) {
+bool isViableBuriedTreasurePos(int mcversion, long seed, int bx, int bz)
+{
     int biome = getBiomeAtPos(mcversion, seed, bx, bz);
     return isBuriedTreasureBiome(biome);
 }
 
-bool isViableShipwreckPos(int mcversion, long seed, int bx, int bz) {
+bool isViableShipwreckPos(int mcversion, long seed, int bx, int bz)
+{
     int biome = getBiomeAtPos(mcversion, seed, bx, bz);
     return isShipwreckBiome(biome);
 }

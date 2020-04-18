@@ -171,9 +171,118 @@ enum
     L_NUM
 };
 
+typedef struct
+{
+    int d[512];
+    double a, b, c;
+} OceanRnd;
+
 long setBaseSeed(long seed);
 long setWorldSeed(long seed, long baseSeed);
 long getWorldSeed(long seed, long mod);
+int isShallowOcean(int id);
+int getBiomeTypeImpl(int id);
+int getBiomeType(int id);
+int biomeExists(int id);
+int equalOrPlateau(int id1, int id2);
+int isDeepOcean(int id);
+int isOceanic(int id);
+float biomeTempImpl(int id);
+float biomeTemp(int id);
+int isBiomeSnowy(int id);
+void cpy(int *dst, int *src, int count);
+void genArea_L_ISLAND_4096(int mcversion, long seed, int * out, int areaX, int areaZ, int areaWidth, int areaHeight);
+void mapZoom_NR(long worldSeed,
+    int* out, int areaX, int areaZ, int areaWidth, int areaHeight,
+    bool getMap_is_mapIsland);
+void genArea_L_ZOOM_2048(int mcversion, long seed, int* out, int areaX, int areaZ, int areaWidth, int areaHeight);
+void mapAddIsland_NR(long worldSeed, int* out, int areaX, int areaZ, int areaWidth, int areaHeight);
+void genArea_L_ADD_ISLAND_2048(int mcversion, long seed, int* out, int areaX, int areaZ, int areaWidth, int areaHeight);
+void genArea_L_ZOOM_1024(int mcversion, long seed, int* out, int const areaX, int const areaZ, int const areaWidth, int const areaHeight);
+void genArea_L_ADD_ISLAND_1024A(int mcversion, long const seed, int* out, int const areaX, int const areaZ, int const areaWidth, int const areaHeight);
+void genArea_L_ADD_ISLAND_1024B(int mcversion, long const seed, int* out, int const areaX, int const areaZ, int const areaWidth, int const areaHeight);
+void genArea_L_ADD_ISLAND_1024C(int mcversion, long const seed, int* out, int const areaX, int const areaZ, int const areaWidth, int const areaHeight);
+//static long setChunkSeed(long worldSeed, long chunkX, long chunkZ);
+//static int mcNextInt(long worldSeed, long *chunkSeed, int mod);
+void mapRemoveTooMuchOcean_NR(long worldSeed, int *out, int const areaX, int const areaZ, int const areaWidth, int const areaHeight);
+void genArea_L_REMOVE_OCEAN_1024(int mcversion, long const seed, int * out, int const areaX, int const areaZ, int const areaWidth, int const areaHeight);
+void mapAddSnow_NR(long worldSeed, int * out, int const areaX, int const areaZ, int const areaWidth, int const areaHeight);
+void genArea_L_ADD_SNOW_1024(int mcversion, long const seed, int * out, int const areaX, int const areaZ, int const areaWidth, int const areaHeight);
+void genArea_L_ADD_ISLAND_1024D(int mcversion, long const seed, int * out, int const areaX, int const areaZ, int const areaWidth, int const areaHeight);
+void mapCoolWarm_NR(long worldSeed, int *out, int const areaX, int const areaZ, int const areaWidth, int const areaHeight);
+void genArea_L_COOL_WARM_1024(int mcversion, long const seed, int * out, int const areaX, int const areaZ, int const areaWidth, int const areaHeight);
+void mapHeatIce_NR(long worldSeed, int *out, int const areaX, int const areaZ, int const areaWidth, int const areaHeight);
+void genArea_L_HEAT_ICE_1024(int mcversion, long const seed, int * out, int const areaX, int const areaZ, int const areaWidth, int const areaHeight);
+//static void mapSpecial_NR(long worldSeed, int *out, int const areaX, int const areaZ, int const areaWidth, int const areaHeight);
+void genArea_L_SPECIAL_1024(int mcversion, long const seed, int * out, int const areaX, int const areaZ, int const areaWidth, int const areaHeight);
+void genArea_L_ZOOM_512(int mcversion, long const seed, int * out, int const areaX, int const areaZ, int const areaWidth, int const areaHeight);
+void genArea_L_ZOOM_256(int mcversion, long const seed, int * out, int const areaX, int const areaZ, int const areaWidth, int const areaHeight);
+void genArea_L_ADD_ISLAND_256(int mcversion, long const seed, int * out, int const areaX, int const areaZ, int const areaWidth, int const areaHeight);
+//static void mapAddMushroomIsland_NR(long worldSeed, int * out, int const areaX, int const areaZ, int const areaWidth, int const areaHeight);
+void genArea_L_ADD_MUSHROOM_256(int mcversion, long const seed, int * out, int const areaX, int const areaZ, int const areaWidth, int const areaHeight);
+//static void mapDeepOcean_NR(long worldSeed, int * out, int const areaX, int const areaZ, int const areaWidth, int const areaHeight);
+void genArea_L_DEEP_OCEAN_256(int mcversion, long const seed, int * out, int const areaX, int const areaZ, int const areaWidth, int const areaHeight);
+//static void mapBiome_NR(long worldSeed, int * out, int const areaX, int const areaZ, int const areaWidth, int const areaHeight);
+//static void mapBiomeBE_NR(long worldSeed, int * out, int const areaX, int const areaZ, int const areaWidth, int const areaHeight);
+void genArea_L_BIOME_256(int mcversion, long const seed, int * out, int const areaX, int const areaZ, int const areaWidth, int const areaHeight);
+void genArea_L_ZOOM_128_MC1_7(int mcversion, long const seed, int * out, int const areaX, int const areaZ, int const areaWidth, int const areaHeight);
+void mapAddBamboo_NR(long worldSeed, int *out, int areaX, int areaZ, int areaWidth, int areaHeight);
+void genArea_L14_BAMBOO_256(int mcversion, long const seed, int * out, int const areaX, int const areaZ, int const areaWidth, int const areaHeight);
+void genArea_L_ZOOM_128_MC1_14(int mcversion, long const seed, int * out, int const areaX, int const areaZ, int const areaWidth, int const areaHeight);
+void genArea_L_ZOOM_128(int mcversion, long const seed, int * out, int const areaX, int const areaZ, int const areaWidth, int const areaHeight);
+void genArea_L_ZOOM_64(int mcversion, long const seed, int * out, int const areaX, int const areaZ, int const areaWidth, int const areaHeight);
+int replaceEdge(int *out, int idx, int v10, int v21, int v01, int v12, int id, int baseID, int edgeID);
+//static void mapBiomeEdge_NR(long worldSeed,  int * out, int areaX, int areaZ, int areaWidth, int areaHeight);
+void genArea_L_BIOME_EDGE_64(int mcversion, long const seed, int * out, int const areaX, int const areaZ, int const areaWidth, int const areaHeight);
+//static void mapRiverInit_NR(long worldSeed, int * out, int areaX, int areaZ, int areaWidth, int areaHeight);
+void genArea_L_RIVER_INIT_256(int mcversion, long const seed, int * out, int const areaX, int const areaZ, int const areaWidth, int const areaHeight);
+void genArea_L_ZOOM_128_HILLS(int mcversion, long const seed, int * out, int const areaX, int const areaZ, int const areaWidth, int const areaHeight);
+void genArea_L_ZOOM_64_HILLS(int mcversion, long const seed, int * out, int const areaX, int const areaZ, int const areaWidth, int const areaHeight);
+void mapHills_NR(long const worldSeed, int * out, int *buf, int areaX, int areaZ, int areaWidth, int areaHeight);
+void mapHills113_NR(long worldSeed, int * out, int * buf, int areaX, int areaZ, int areaWidth, int areaHeight);
+void genArea_L_HILLS_64(int mcversion, long const seed, int * out, int const areaX, int const areaZ, int const areaWidth, int const areaHeight);
+void mapRareBiome_NR(long worldSeed, int * out, int areaX, int areaZ, int areaWidth, int areaHeight);
+void genArea_L_RARE_BIOME_64(int mcversion, long const seed, int * out, int const areaX, int const areaZ, int const areaWidth, int const areaHeight);
+void genArea_L_ZOOM_32(int mcversion, long const seed, int * out, int const areaX, int const areaZ, int const areaWidth, int const areaHeight);
+void genArea_L_ADD_ISLAND_32(int mcversion, long const seed, int * out, int const areaX, int const areaZ, int const areaWidth, int const areaHeight);
+void genArea_L_ZOOM_16(int mcversion, long const seed, int * out, int const areaX, int const areaZ, int const areaWidth, int const areaHeight);
+int replaceOcean(int *out, int idx, int v10, int v21, int v01, int v12, int id, int replaceID);
+int isBiomeJFTO(int id);
+void mapShore_NR(long worldSeed, int * out, int areaX, int areaZ, int areaWidth, int areaHeight);
+void genArea_L_SHORE_16(int mcversion, long const seed, int * out, int const areaX, int const areaZ, int const areaWidth, int const areaHeight);
+void genArea_L_ZOOM_8(int mcversion, long const seed, int * out, int const areaX, int const areaZ, int const areaWidth, int const areaHeight);
+void genArea_L_ZOOM_4(int mcversion, long const seed, int * out, int const areaX, int const areaZ, int const areaWidth, int const areaHeight);
+void mapSmooth_NR(long worldSeed, int * out, int areaX, int areaZ, int areaWidth, int areaHeight);
+void genArea_L_SMOOTH_4(int mcversion, long const seed, int * out, int const areaX, int const areaZ, int const areaWidth, int const areaHeight);
+void genArea_L_ZOOM_128_RIVER(int mcversion, long const seed, int * out, int const areaX, int const areaZ, int const areaWidth, int const areaHeight);
+void genArea_L_ZOOM_64_RIVER(int mcversion, long const seed, int * out, int const areaX, int const areaZ, int const areaWidth, int const areaHeight);
+void genArea_L_ZOOM_32_RIVER(int mcversion, long const seed, int * out, int const areaX, int const areaZ, int const areaWidth, int const areaHeight);
+void genArea_L_ZOOM_16_RIVER(int mcversion, long const seed, int * out, int const areaX, int const areaZ, int const areaWidth, int const areaHeight);
+void genArea_L_ZOOM_8_RIVER(int mcversion, long const seed, int * out, int const areaX, int const areaZ, int const areaWidth, int const areaHeight);
+void genArea_L_ZOOM_4_RIVER(int mcversion, long const seed, int * out, int const areaX, int const areaZ, int const areaWidth, int const areaHeight);
+int reduceID(int id);
+void mapRiver(long worldSeed, int * out, int areaX, int areaZ, int areaWidth, int areaHeight);
+void genArea_L_RIVER_4(int mcversion, long const seed, int * out, int const areaX, int const areaZ, int const areaWidth, int const areaHeight);
+void genArea_L_SMOOTH_4_RIVER(int mcversion, long const seed, int * out, int const areaX, int const areaZ, int const areaWidth, int const areaHeight);
+//static void mapRiverMix_NR(long worldSeed, int * out, int *buf, int areaX, int areaZ, int areaWidth, int areaHeight);
+void genArea_L_RIVER_MIX_4(int mcversion, long const seed, int * out, int const areaX, int const areaZ, int const areaWidth, int const areaHeight);
+void oceanRndInit(OceanRnd *rnd, long seed);
+double lerp(const double part, const double from, const double to);
+double indexedLerp(int idx, const double d1, const double d2, const double d3);
+double getOceanTemp(OceanRnd *rnd, double d1, double d2, double d3);
+//static void mapOceanTemp_NR(long worldSeed, int * out, int areaX, int areaZ, int areaWidth, int areaHeight, struct OceanRnd *rnd);
+void genArea_L13_OCEAN_TEMP_256(int mcversion, long const seed, int * out, int const areaX, int const areaZ, int const areaWidth, int const areaHeight);
+void genArea_L13_ZOOM_128(int mcversion, long const seed, int * out, int const areaX, int const areaZ, int const areaWidth, int const areaHeight);
+void genArea_L13_ZOOM_64(int mcversion, long const seed, int * out, int const areaX, int const areaZ, int const areaWidth, int const areaHeight);
+void genArea_L13_ZOOM_32(int mcversion, long const seed, int * out, int const areaX, int const areaZ, int const areaWidth, int const areaHeight);
+void genArea_L13_ZOOM_16(int mcversion, long const seed, int * out, int const areaX, int const areaZ, int const areaWidth, int const areaHeight);
+void genArea_L13_ZOOM_8(int mcversion, long const seed, int * out, int const areaX, int const areaZ, int const areaWidth, int const areaHeight);
+void genArea_L13_ZOOM_4(int mcversion, long const seed, int * out, int const areaX, int const areaZ, int const areaWidth, int const areaHeight);
+void mapOceanMix_NR(long worldSeed, int * out, int areaX, int areaZ, int areaWidth, int areaHeight, int *map1, int *map2);
+void genArea_L13_OCEAN_MIX_4(int mcversion, long const seed, int * out, int const areaX, int const areaZ, int const areaWidth, int const areaHeight);
+void mapVoronoiZoom_NR(long worldSeed, int * out, int areaX, int areaZ, int areaWidth, int areaHeight, int *buf);
+void genArea_L_VORONOI_ZOOM_1(int mcversion, long const seed, int* out, int const a_areaX, int const a_areaZ, int const areaWidth, int const areaHeight);
+void genArea(int const mcversion, long const seed, int const layer, int *out, int const x, int const z, int const width, int const height);
 
 long setBaseSeed(long seed)
 {
@@ -501,7 +610,8 @@ float biomeTempImpl(int id)
     }
 }
 
-float biomeTemp(int id) {
+float biomeTemp(int id)
+{
     switch (id) {
     case plains + 128: return biomeTempImpl(plains);
     case desert + 128: return biomeTempImpl(desert);
@@ -538,7 +648,8 @@ int isBiomeSnowy(int id)
     return temp < 0.1;
 }
 
-void cpy(int *dst, int *src, int count) {
+void cpy(int *dst, int *src, int count)
+{
     for (int i = 0; i < count; i++) {
         dst[i] = src[i];
     }
@@ -576,9 +687,7 @@ void genArea_L_ISLAND_4096(int mcversion, long seed, int * out, int areaX, int a
     }
 }
 
-void mapZoom_NR(long worldSeed,
-    int* out, int areaX, int areaZ, int areaWidth, int areaHeight,
-    bool getMap_is_mapIsland)
+void mapZoom_NR(long worldSeed, int* out, int areaX, int areaZ, int areaWidth, int areaHeight, bool getMap_is_mapIsland)
 {
     int pX = areaX >> 1;
     int pZ = areaZ >> 1;
@@ -587,7 +696,6 @@ void mapZoom_NR(long worldSeed,
     int x, z;
 
     int newWidth = (pWidth) << 1;
-    int newHeight = (pHeight) << 1;
     int idx, a, b;
     int buf[CB_MAXLEN_MAP_ZOOM] = {0};
 
@@ -922,7 +1030,7 @@ void mapAddSnow_NR(long worldSeed, int * out, int const areaX, int const areaZ, 
 {
     int pWidth = areaWidth + 2;
     int x, z;
-    
+
     for (z = 0; z < areaHeight; z++)
     {
         for (x = 0; x < areaWidth; x++)
@@ -1096,7 +1204,7 @@ void genArea_L_ZOOM_512(int mcversion, long const seed, int * out, int const are
     int pZ = areaZ >> 1;
     int pWidth  = ((areaX + areaWidth ) >> 1) - pX + 1;
     int pHeight = ((areaZ + areaHeight) >> 1) - pZ + 1;
-    
+
     genArea_L_SPECIAL_1024(mcversion, seed, out, pX, pZ, pWidth, pHeight);
     long const worldSeed = getWorldSeed(seed, 2002);
     mapZoom_NR(worldSeed, out, areaX, areaZ, areaWidth, areaHeight, false);
@@ -2167,53 +2275,17 @@ void genArea_L_RIVER_MIX_4(int mcversion, long const seed, int * out, int const 
     mapRiverMix_NR(worldSeed, out, buf, areaX, areaZ, areaWidth, areaHeight);
 }
 
-struct OceanRnd
-{
-    int d[512];
-    double a, b, c;
-};
-
-void setSeed(long* seed)
-{
-    *seed = (*seed ^ 0x5deece66d) & ((1L << 48) - 1);
-}
-
-int next(long* seed, const int bits)
-{
-    *seed = (*seed * 0x5deece66d + 0xb) & ((1L << 48) - 1);
-    return (int)(*seed >> (48 - bits));
-}
-
-double nextDouble(long* seed)
-{
-    return (((long)next(seed, 26) << 27) + next(seed, 27)) / (double)(1L << 53);
-}
-
-int nextInt(long* seed, const int n)
-{
-    int bits, val;
-    const int m = n - 1;
-
-    if ((m & n) == 0) return (int)((n * (long)next(seed, 31)) >> 31);
-
-    do {
-        bits = next(seed, 31);
-        val = bits % n;
-    } while (bits - val + m < 0);
-    return val;
-}
-
 /* Initialises data for the ocean temperature types using the world seed.
  * This function is called when the world seed is applied in setWorldSeed().
  */
-void oceanRndInit(struct OceanRnd *rnd, long seed)
+void oceanRndInit(OceanRnd *rnd, long seed)
 {
     int i = 0;
 //    memset(rnd, 0, sizeof(*rnd));
-    setSeed(&seed);
-    rnd->a = nextDouble(&seed) * 256.0;
-    rnd->b = nextDouble(&seed) * 256.0;
-    rnd->c = nextDouble(&seed) * 256.0;
+    javaRndSetSeed(&seed);
+    rnd->a = javaRndNextDouble(&seed) * 256.0;
+    rnd->b = javaRndNextDouble(&seed) * 256.0;
+    rnd->c = javaRndNextDouble(&seed) * 256.0;
 
     for (i = 0; i < 256; i++)
     {
@@ -2221,7 +2293,7 @@ void oceanRndInit(struct OceanRnd *rnd, long seed)
     }
     for (i = 0; i < 256; i++)
     {
-        int n3 = nextInt(&seed, 256 - i) + i;
+        int n3 = javaRndNextInt(&seed, 256 - i) + i;
         int n4 = rnd->d[i];
         rnd->d[i] = rnd->d[n3];
         rnd->d[n3] = n4;
@@ -2246,7 +2318,7 @@ double indexedLerp(int idx, const double d1, const double d2, const double d3)
 }
 
 
-double getOceanTemp(struct OceanRnd *rnd, double d1, double d2, double d3)
+double getOceanTemp(OceanRnd *rnd, double d1, double d2, double d3)
 {
     d1 += rnd->a;
     d2 += rnd->b;
@@ -2292,7 +2364,7 @@ double getOceanTemp(struct OceanRnd *rnd, double d1, double d2, double d3)
     return lerp(t3, l1, l5);
 }
 
-static void mapOceanTemp_NR(long worldSeed, int * out, int areaX, int areaZ, int areaWidth, int areaHeight, struct OceanRnd *rnd)
+static void mapOceanTemp_NR(long worldSeed, int * out, int areaX, int areaZ, int areaWidth, int areaHeight, OceanRnd *rnd)
 {
     int x, z;
 
@@ -2318,7 +2390,7 @@ static void mapOceanTemp_NR(long worldSeed, int * out, int areaX, int areaZ, int
 
 void genArea_L13_OCEAN_TEMP_256(int mcversion, long const seed, int * out, int const areaX, int const areaZ, int const areaWidth, int const areaHeight)
 {
-    struct OceanRnd rnd;
+    OceanRnd rnd;
     oceanRndInit(&rnd, seed);
     long worldSeed = getWorldSeed(seed, 2);
     mapOceanTemp_NR(worldSeed, out, areaX, areaZ, areaWidth, areaHeight, &rnd);
