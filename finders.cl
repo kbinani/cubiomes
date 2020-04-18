@@ -5,6 +5,7 @@ bool isDesertPyramidBiome(int biomeId);
 bool isBuriedTreasureBiome(int biomeId);
 bool isIglooBiome(int biomeId);
 bool isMansionBiome(int biomeID);
+bool isPillagerOutpostBiome(int biomeId);
 int getBiomeAtPos(int mcversion, long seed, int bx, int bz);
 bool isViableMansionPos(int mcversion, long seed, int bx, int bz);
 bool isViableVillagePos(int mcversion, long seed, int bx, int bz);
@@ -70,6 +71,16 @@ bool isMansionBiome(int biomeID)
     return (biomeID == dark_forest ||
             biomeID == dark_forest_hills);
 }
+
+bool isPillagerOutpostBiome(int biomeId)
+{
+    return (biomeId == plains ||
+            biomeId == desert ||
+            biomeId == taiga ||
+            biomeId == snowy_tundra ||
+            biomeId == savanna);
+}
+
 
 int getBiomeAtPos(int mcversion, long seed, int bx, int bz)
 {
