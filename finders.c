@@ -3,6 +3,9 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#if defined(_MSC_VER) && !defined(_USE_MATH_DEFINES)
+#define _USE_MATH_DEFINES // M_PI
+#endif
 #include <math.h>
 #include <limits.h>
 #include <float.h>
@@ -15,7 +18,7 @@
 #define IS_DIR_SEP(C) ((C) == '/' || (C) == '\\')
 #define stat _stat
 #define mkdir(P,X) _mkdir(P)
-#define S_IFDIR _S_IFDIR
+#define S_ISDIR(M) ((M) == _S_IFDIR)
 #else
 #define IS_DIR_SEP(C) ((C) == '/')
 #endif
@@ -2243,7 +2246,9 @@ int isViableEndCityTerrain(const EndNoise *en, const SurfaceNoise *sn,
     int cellx = (blockX >> 3);
     int cellz = (blockZ >> 3);
     // TODO: make sure upper bound is ok
-    const int y0 = 15, y1 = 18; // only check range that could yield h >= 60
+    // const int y0 = 15, y1 = 18; // only check range that could yield h >= 60
+#define y0 (15)
+#define y1 (18)
     double ncol[3][3][y1-y0+1];
 
     sampleNoiseColumnEnd(ncol[0][0], sn, en, cellx, cellz, y0, y1);
@@ -2312,6 +2317,8 @@ int isViableEndCityTerrain(const EndNoise *en, const SurfaceNoise *sn,
     if (h10 < h00) h00 = h10;
     if (h11 < h00) h00 = h11;
     return h00 >= 60;
+#undef y0
+#undef y1
 }
 
 
