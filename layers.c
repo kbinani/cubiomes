@@ -934,7 +934,10 @@ int getSurfaceHeightEnd(int mc, uint64_t seed, int x, int z)
     double dx = (x & 7) / 8.0;
     double dz = (z & 7) / 8.0;
 
-    const int y0 = 0, y1 = 32, yn = y1-y0+1;
+    // const int y0 = 0, y1 = 32, yn = y1-y0+1;
+#define y0 (0)
+#define y1 (32)
+#define yn (y1-y0+1)
     double ncol00[yn];
     double ncol01[yn];
     double ncol10[yn];
@@ -945,6 +948,9 @@ int getSurfaceHeightEnd(int mc, uint64_t seed, int x, int z)
     sampleNoiseColumnEnd(ncol11, &sn, &en, cellx+1, cellz+1, y0, y1);
 
     return getSurfaceHeight(ncol00, ncol01, ncol10, ncol11, y0, y1, 4, dx, dz);
+#undef y0
+#undef y1
+#undef yn
 }
 
 int genEndScaled(const EndNoise *en, int *out, Range r, int mc, uint64_t sha)
